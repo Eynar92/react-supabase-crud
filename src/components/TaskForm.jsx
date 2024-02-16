@@ -19,7 +19,7 @@ export const TaskForm = () => {
     return (
         <form
             onSubmit={handleSubmit}
-            className='flex gap-4'
+            className='flex gap-4 px-4'
         >
             <input
                 type="text"
