@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from '../hooks/useForm'
-import { supabase } from '../supabase/client';
+import { useTasks } from '../hooks';
 
 export const TaskForm = () => {
 
@@ -8,24 +8,12 @@ export const TaskForm = () => {
         taskName: '',
     });
 
+    const { addTask, addTaskLoader } = useTasks();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            const user = await supabase.auth.getUser();
-            const userId = user.data.user.id;
-
-            const result = await supabase.from('tasks').insert({
-                name: taskName,
-                userId: userId,
-            });
-
-            console.log(result);
-            onResetForm();
-        } catch (error) {
-            console.log(error);
-        }
-
+        await addTask(taskName);
+        onResetForm();
     }
 
     return (
@@ -42,9 +30,10 @@ export const TaskForm = () => {
                 className="w-72 bg-transparent border border-zinc-800 p-2 rounded-md placeholder:text-zinc-600"
             />
             <button
+                disabled={addTaskLoader}
                 className="bg-zinc-800 px-4 py-2 rounded-md uppercase hover:bg-zinc-900 transition-colors"
             >
-                Añadir
+                {addTaskLoader ? 'Cargando...' : 'Agregar'}
             </button>
         </form>
     )

@@ -5,7 +5,7 @@ import { supabase } from "../supabase/client"
 export const Layout = () => {
 
     return (
-        <div className="h-screen w-screen flex items-center justify-center">
+        <div className="h-screen w-full py-4 overflow-hidden">
             <Outlet />
         </div>
     )

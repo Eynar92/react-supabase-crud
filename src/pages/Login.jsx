@@ -1,5 +1,5 @@
 import { supabase } from "../supabase/client";
-import { useForm } from "../hooks/useForm"
+import { useForm } from "../hooks/"
 import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
